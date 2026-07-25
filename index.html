@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MixLab — Simulador de Misturas Químicas</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="toast-container" class="toast-container"></div>
+
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="brand">
+        <div class="brand-icon">⚗️</div>
+        <span class="brand-name">MixLab</span>
+      </div>
+      <div class="user-pill">
+        <div class="avatar">JS</div>
+        <div class="user-info">
+          <div class="user-name">José Silva Oliveira</div>
+          <div class="user-role">Operador</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="app-main">
+    <div class="main-inner">
+      <div class="page-title-row">
+        <div>
+          <h1>Simulação de misturas</h1>
+          <p class="subtitle">Selecione produtos do estoque, defina volumes e visualize o resultado da composição em tempo real.</p>
+        </div>
+        <button class="btn btn-ghost" id="btn-reset">
+          <span class="icon">↺</span> Limpar
+        </button>
+      </div>
+
+      <div class="grid-layout">
+        <!-- Estoque -->
+        <section class="panel panel-stock">
+          <div class="panel-head">
+            <h2>Estoque</h2>
+            <button class="btn btn-outline btn-sm" id="btn-new-product">Novo produto</button>
+          </div>
+          <p class="panel-sub" id="stock-count">4 produtos disponíveis</p>
+          <div class="stock-list" id="stock-list"></div>
+        </section>
+
+        <!-- Composição da Mistura -->
+        <section class="panel panel-mix">
+          <h2>Composição da Mistura</h2>
+          <div class="mix-header-row">
+            <span>Produto</span>
+            <span>Volume (L)</span>
+            <span></span>
+          </div>
+          <div class="mix-rows" id="mix-rows"></div>
+          <button class="btn btn-outline btn-full" id="btn-add-row">Adicionar produto à mistura</button>
+          <div class="alert alert-danger hidden" id="stock-alert">
+            <span class="icon">⚠️</span>
+            <div>
+              <div class="alert-title">Estoque insuficiente</div>
+              <div class="alert-desc" id="stock-alert-desc"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Resultado -->
+        <section class="panel panel-result">
+          <h2>Resultado da Composição</h2>
+          <p class="panel-sub">Simulação calculada a partir dos produtos selecionados</p>
+
+          <div class="metrics-grid">
+            <div class="metric"><div class="metric-label">Volume Total</div><div class="metric-value" id="m-volume">0 L</div></div>
+            <div class="metric"><div class="metric-label">pH Estimado</div><div class="metric-value" id="m-ph">—</div></div>
+            <div class="metric"><div class="metric-label">Densidade</div><div class="metric-value" id="m-density">—</div></div>
+            <div class="metric"><div class="metric-label">Temperatura Reação</div><div class="metric-value" id="m-temp">—</div></div>
+          </div>
+
+          <div class="tint-box">
+            <div class="tint-label">Classificação de Risco</div>
+            <div class="tint-value" id="m-risk">—</div>
+          </div>
+
+          <div class="composition-box">
+            <div class="composition-title">Composição por volume</div>
+            <div class="composition-bar" id="composition-bar"></div>
+            <ul class="composition-list" id="composition-list"></ul>
+          </div>
+
+          <div class="status-pill" id="status-pill">
+            <span class="status-dot"></span>
+            <span id="status-text">Aguardando dados</span>
+          </div>
+
+          <button class="btn btn-outline btn-full btn-save" id="btn-save" disabled>Salvar simulação</button>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <!-- Modal: Novo Produto -->
+  <div class="modal-overlay hidden" id="modal-overlay">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Cadastrar produto</h3>
+        <p class="modal-desc">Registre um novo insumo químico disponível em estoque.</p>
+      </div>
+      <div class="modal-body">
+        <div class="form-row two-col">
+          <div class="field">
+            <label>Nome do produto</label>
+            <input type="text" id="f-name" placeholder="Ex.: Ácido Clorídrico 32%" />
+          </div>
+          <div class="field">
+            <label>Código</label>
+            <input type="text" id="f-code" placeholder="HCL-32" class="mono" />
+          </div>
+        </div>
+        <div class="form-row three-col">
+          <div class="field">
+            <label>Densidade (g/mL)</label>
+            <input type="number" step="0.01" id="f-density" value="1" />
+          </div>
+          <div class="field">
+            <label>pH</label>
+            <input type="number" step="0.1" id="f-ph" value="7" />
+          </div>
+          <div class="field">
+            <label>Estoque (L)</label>
+            <input type="number" id="f-stock" value="0" />
+          </div>
+        </div>
+        <div class="field">
+          <label>Nível de risco</label>
+          <select id="f-hazard">
+            <option value="baixo">Baixo</option>
+            <option value="moderado">Moderado</option>
+            <option value="alto">Alto</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" id="btn-cancel-product">Cancelar</button>
+        <button class="btn btn-primary" id="btn-submit-product">Cadastrar produto</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
