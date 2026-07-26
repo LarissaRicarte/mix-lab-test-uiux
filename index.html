@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>MixLab — Simulador de Misturas Químicas</title>
 <link rel="stylesheet" href="styles.css" />
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 </head>
 <body>
   <div id="toast-container" class="toast-container"></div>
@@ -12,7 +13,7 @@
   <header class="app-header">
     <div class="header-inner">
       <div class="brand">
-        <div class="brand-icon">⚗️</div>
+        <div class="brand-icon"><i data-lucide="flask-conical" color="#2f4ed6"></i></div>
         <span class="brand-name">MixLab</span>
       </div>
       <div class="user-pill">
@@ -33,7 +34,7 @@
           <p class="subtitle">Selecione produtos do estoque, defina volumes e visualize o resultado da composição em tempo real.</p>
         </div>
         <button class="btn btn-ghost" id="btn-reset">
-          <span class="icon">↺</span> Limpar
+          <span class="icon"><i data-lucide="rotate-ccw"></i></span> Limpar
         </button>
       </div>
 
@@ -95,7 +96,7 @@
             <span id="status-text">Aguardando dados</span>
           </div>
 
-          <button class="btn btn-outline btn-full btn-save" id="btn-save" disabled>Salvar simulação</button>
+          <button class="btn btn-primary btn-full btn-save" id="btn-save" disabled>Salvar simulação</button>
         </section>
       </div>
     </div>
@@ -150,5 +151,8 @@
   </div>
 
   <script src="app.js"></script>
+  <script>
+    lucide.createIcons();
+  </script>
 </body>
 </html>

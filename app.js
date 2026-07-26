@@ -6,7 +6,7 @@ let products = [
   { id: "p4", name: "Etanol Anidro", code: "ETOH-99", density: 0.79, ph: 7.0, stock: 640, hazard: "moderado" },
 ];
 
-let mix = [{ productId: "p1", volume: 0 }];
+let mix = [];
 
 const palette = [
   "oklch(0.45 0.15 240)",
@@ -100,7 +100,7 @@ function renderMixRows() {
           <input type="number" class="row-volume" data-index="${i}" min="0" step="0.1" value="${row.volume}" />
           <span class="vol-suffix">L</span>
         </div>
-        <button class="btn-remove" data-index="${i}" ${mix.length === 1 ? "disabled" : ""} aria-label="Remover">🗑</button>
+        <button class="btn-remove" data-index="${i}" ${mix.length === 1 ? "disabled" : ""} aria-label="Remover"><i data-lucide="trash" color="#6b7280"></i></button>
       </div>
     `;
   }).join("");
@@ -192,6 +192,7 @@ function renderAll() {
   renderStock();
   renderMixRows();
   renderResult();
+  lucide.createIcons();
 }
 
 function escapeHtml(str) {
@@ -202,7 +203,7 @@ function escapeHtml(str) {
 
 // ---------- Ações globais ----------
 document.getElementById("btn-reset").addEventListener("click", () => {
-  mix = [{ productId: products[0]?.id ?? "", volume: 0 }];
+  mix = [];
   renderAll();
 });
 
