@@ -53,7 +53,7 @@ npx serve .
 ## Design
 
 O design da interface foi construído no Figma, cobrindo os fluxos de estado padrão e estado vazio em resoluções desktop (1440px) e Full HD (1920px), antes da implementação em código.
-[Figma - Mix Lab](https://www.figma.com/design/242ko3kLMowwr8GONY5Rg1/MixLab---Optimatech?node-id=40-405&t=rvLSSae5uXXDR3mE-1)
+[Figma - Mix Lab](https://www.figma.com/design/242ko3kLMowwr8GONY5Rg1/MixLab---Optimatech?node-id=40-715&t=rvLSSae5uXXDR3mE-1)
 
 
 ## Autora
